@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile.S1
     container_name: S1_Ubuntu2210
     ports:
-      # Mapear el puerto 22 del contenedor a 2222 en tu máquina anfitriona
+ 
       - "2222:22"
     networks:
       - ssh_lab_network
