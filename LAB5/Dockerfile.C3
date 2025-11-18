@@ -9,5 +9,5 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Comando por defecto al iniciar el contenedor (mantiene vivo el contenedor)
+# Comando por defecto al iniciar el contenedor 
 CMD ["tail", "-f", "/dev/null"]
