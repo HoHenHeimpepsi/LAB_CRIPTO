@@ -12,7 +12,6 @@ RUN apt-get update && \
 RUN useradd -m -s /bin/bash prueba && \
     echo "prueba:prueba" | chpasswd 
 
-# Asegurar que el servidor SSH no haga comprobación DNS
 RUN echo "UseDNS no" >> /etc/ssh/sshd_config
 RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config # Opcional: para debug
 
