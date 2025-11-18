@@ -1,0 +1,23 @@
+FROM ubuntu:22.10
+
+RUN sed -i 's/archive.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list && \
+    sed -i 's/security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list
+
+# Instalar cliente y servidor OpenSSH
+RUN apt-get update && \
+    apt-get install -y openssh-server openssh-client && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN useradd -m -s /bin/bash prueba && \
+    echo "prueba:prueba" | chpasswd 
+
+# Asegurar que el servidor SSH no haga comprobación DNS
+RUN echo "UseDNS no" >> /etc/ssh/sshd_config
+RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config # Opcional: para debug
+
+# Exponer el puerto por defecto de SSH
+EXPOSE 22
+
+# Iniciar el servicio SSH al arrancar el contenedor
+CMD ["/usr/sbin/sshd", "-D"]
